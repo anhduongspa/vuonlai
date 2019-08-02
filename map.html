@@ -1,0 +1,76 @@
+<html>
+
+<head>
+	<title>Anh Duong Spa</title>
+	<style>
+		body {
+				margin: 0;
+			}
+		</style>
+	<style>
+		#map {
+				height: 100%;
+			}
+		</style>
+</head>
+
+<body>
+	<div id="map"></div>
+	<script type="text/javascript">
+		function createMap() {
+			var opts = {
+				center: {
+					lat: 10.788346,
+					lng: 106.622957,
+				},
+				zoom: 19,
+				styles: [],
+				maxZoom: 20,
+				minZoom: 0,
+				//mapTypeId: 'hybrid',
+			};
+
+
+			opts.clickableIcons = true;
+			opts.disableDoubleClickZoom = false;
+			opts.draggable = true;
+			opts.keyboardShortcuts = true;
+			opts.scrollwheel = false;
+
+			var setControlOptions = function (key, enabled, position, style, mapTypeIds) {
+				opts[key + 'Control'] = enabled;
+				opts[key + 'ControlOptions'] = {
+					position: google.maps.ControlPosition[position],
+					style: google.maps.MapTypeControlStyle[style],
+					mapTypeIds: mapTypeIds
+				};
+			};
+
+			setControlOptions('fullscreen', true, 'DEFAULT', '', null);
+
+			setControlOptions('mapType', true, 'DEFAULT', 'DEFAULT', ["roadmap", "satellite", "terrain"]);
+
+			setControlOptions('rotate', false, 'DEFAULT', '', null);
+
+			setControlOptions('scale', false, '', '', null);
+
+			setControlOptions('streetView', false, 'DEFAULT', '', null);
+
+			setControlOptions('zoom', true, 'DEFAULT', '', null);
+
+			var map = new google.maps.Map(document.getElementById('map'), opts);
+			(function () {
+				var markerOptions = {
+					map: map,
+					position: {
+						lat: 10.788346,
+						lng: 106.622957,
+					}
+				};
+				var marker = new google.maps.Marker(markerOptions);
+			})();
+		}
+	</script>
+	<script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsn-p4LEmXsBKABg6Ya9ffFZXJ66-AEk0&v=3.31&language=vi&libraries=places,geometry&callback=createMap"></script>
+</body>
+</html>
